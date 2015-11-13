@@ -1,5 +1,6 @@
 <?php
 	require_once("functions.php");
+	require_once("InterestManager.class.php");
 	
 	if(!isset($_SESSION["id_from_db"])){
 		header("Location: login.php");

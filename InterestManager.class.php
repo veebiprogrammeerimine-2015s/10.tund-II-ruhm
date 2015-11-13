@@ -18,6 +18,8 @@ class InterestManager {
 		
 		// 2) kui ei ole siis lisate juurde
 		
+		// kui võtate aluseks createUser funktsiooni siis tuleb muuta seal ainult 4 rida. 
+		
 	}
 	
 	
