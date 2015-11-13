@@ -20,7 +20,8 @@
 	// aadressireal on new_interest
 	if(isset($_GET["new_interest"])){
 		
-		$InterestManager->addInterest($_GET["new_interest"]);
+		// returniga tule response muutujasse $added_interest
+		$added_interest = $InterestManager->addInterest($_GET["new_interest"]);
 		
 	}
 	
@@ -33,6 +34,19 @@
 </p>
 
 <h2>Lisa uus huviala</h2>
+ <?php if(isset($added_interest->error)): ?>
+  
+	<p style="color:red;">
+		<?=$added_interest->error->message;?>
+	</p>
+  
+  <?php elseif(isset($added_interest->success)): ?>
+  
+	<p style="color:green;">
+		<?=$added_interest->success->message;?>
+	</p>
+  
+  <?php endif; ?>  
 <form>
 	<input name="new_interest">
 	<input type="submit">
