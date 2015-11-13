@@ -4,7 +4,7 @@ class InterestManager {
 	//InterestManager.class.php
 	private $connection;
 	
-	// kui ¸tlen new siis siin saad k‰tte sulgudest
+	// kui √ºtlen new siis siin saad k√§tte sulgudest
 	function __construct($mysqli){
 		
 		// selle klassi muutuja
@@ -40,7 +40,7 @@ class InterestManager {
 		}else{
 			$error = new StdClass();
 			$error->id =1;
-			$error->message = "Midagi l‰ks katki!";
+			$error->message = "Midagi l√§ks katki!";
 			$response->error = $error;
 		}
 		
@@ -50,5 +50,30 @@ class InterestManager {
 		
 	}
 	
+	function createDropdown(){
+		
+		$html = '';
+		// ''
+		$html .= '<select name="dropdownselect">';
+
+		$stmt = $this->connection->prepare("SELECT name FROM interests");
+		$stmt->bind_result($name);
+		$stmt->execute();
+		
+		//iga rea kohta teen midagi
+		while($stmt->fetch()){
+			$html .= '<option>'.$name.'</option>';
+		}
+		
+		$stmt->close();
+		
+		//$html .= '<option value="2" selected>Teisip√§ev</option>';
+
+		$html .= '</select>';
+
+		
+		return $html;
+		
+	}
 	
 } ?>

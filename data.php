@@ -4,6 +4,11 @@
 	
 	if(!isset($_SESSION["id_from_db"])){
 		header("Location: login.php");
+		
+		//************
+		//** OLULINE *
+		//************
+		exit();
 	}
 	
 	if(isset($_GET["logout"])){
@@ -52,6 +57,11 @@
 	<input type="submit">
 </form>
 
-
+<h2>Minu huvialad</h2>
+<form>
+	<!-- SIIA TULEB RIPPMENÜÜ -->
+	<?php echo $InterestManager->createDropdown();?>
+	<input type="submit">
+</form>
 
 
