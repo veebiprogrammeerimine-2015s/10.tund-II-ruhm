@@ -76,4 +76,42 @@ class InterestManager {
 		
 	}
 	
+	function addUserInterest($new_interest_id, $user_id){
+		
+		//$new_interest aadressirealt tulnud muutuja
+		
+		$response = new StdClass();
+
+		//kas selline huviala on selllel kasutajal juba olemas?
+		$stmt = $this->connection->prepare("SELECT id FROM user_interests WHERE user_id = ? AND interests_id = ?");
+		$stmt->bind_param("ii", $user_id, $new_interest_id);
+		$stmt->execute();
+		if($stmt->fetch()){
+			$error = new StdClass();
+			$error->id = 0;
+			$error->message = "Selline huviala juba olemas!";
+			$response->error = $error;
+			return $response;
+		}
+		$stmt->close();
+	
+		$stmt = $this->connection->prepare("INSERT INTO user_interests (user_id, interests_id) VALUES (?,?)");
+		$stmt->bind_param("ii", $user_id, $new_interest_id);
+		if($stmt->execute()){
+			$success = new StdClass();
+			$success->message = "Huviala edukalt salvestatud";
+			$response->success = $success;
+		}else{
+			$error = new StdClass();
+			$error->id =1;
+			$error->message = "Midagi läks katki!";
+			$response->error = $error;
+		}
+		
+		$stmt->close();
+		
+		return $response;
+		
+	}
+	
 } ?>
