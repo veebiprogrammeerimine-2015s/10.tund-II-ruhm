@@ -56,13 +56,13 @@ class InterestManager {
 		// ''
 		$html .= '<select name="dropdownselect">';
 
-		$stmt = $this->connection->prepare("SELECT name FROM interests");
-		$stmt->bind_result($name);
+		$stmt = $this->connection->prepare("SELECT id, name FROM interests");
+		$stmt->bind_result($id, $name);
 		$stmt->execute();
 		
 		//iga rea kohta teen midagi
 		while($stmt->fetch()){
-			$html .= '<option>'.$name.'</option>';
+			$html .= '<option value="'.$id.'">'.$name.'</option>';
 		}
 		
 		$stmt->close();
