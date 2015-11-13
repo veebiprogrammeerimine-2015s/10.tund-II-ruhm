@@ -114,4 +114,31 @@ class InterestManager {
 		
 	}
 	
+	
+	function getUserInterests($user_id){
+		
+		$html = '';
+		
+		$stmt = $this->connection->prepare("
+			SELECT interests.name FROM user_interests
+			INNER JOIN interests ON 
+			user_interests.interests_id = interests.id
+			WHERE user_interests.user_id = ?
+		");
+		//echo $user_id;
+		$stmt->bind_param("i", $user_id);
+		$stmt->bind_result($name);
+		$stmt->execute();
+		
+		while($stmt->fetch()){
+			$html .= $name." ";
+		}
+		
+		$stmt->close();
+		
+		return $html;
+		
+	}
+	
+	
 } ?>

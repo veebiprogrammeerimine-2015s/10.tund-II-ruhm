@@ -82,4 +82,4 @@
 	<input type="submit">
 </form>
 
-
+<p><?php echo $InterestManager->getUserInterests($_SESSION["id_from_db"]);?></p>
